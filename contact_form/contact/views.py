@@ -7,6 +7,13 @@ def index(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
+            # Save the form data to the database
+            
+            contact = form.save(commit=False)  # Create a model instance but don't save yet
+            contact.save()  # Save the instance to the database
+            
+            # Send an email
+
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             subject = form.cleaned_data['subject']
@@ -21,7 +28,7 @@ def index(request):
             })
 
             # Define the "From" email address and recipient list
-            from_email = 'your_custom_from_email@example.com'  # The desired "From" email address
+            from_email = 'noreply.271807@gmail.com'  # The desired "From" email address
             recipient_list = ['sowmyam0291@gmail.com']
 
             try:
@@ -32,8 +39,12 @@ def index(request):
                     recipient_list,
                     html_message=html
                 )
-                print('The form is valid and email was sent.')
-                return redirect('index')
+                return render(request, 'contact/confirmation.html', {
+                    'name': name,
+                    'email': email,
+                    'subject': subject,
+                    'message': message,
+                })
             except Exception as e:
                 print(f'Error sending email: {e}')
                 # Optionally, add error handling here
