@@ -17,9 +17,10 @@ Including another URLconf
 from django.contrib import admin
 
 from django.urls import path
-from contact.views import index
+from contact.views import index, confirmation
 
 urlpatterns = [
     path('', index, name='index'),  # Homepage URL
     path('admin/', admin.site.urls),
+    path('confirmation/', confirmation, name='confirmation'),  # Confirmation page URL
 ]

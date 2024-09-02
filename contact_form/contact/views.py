@@ -2,6 +2,7 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from .forms import ContactForm
+from .models import Contact
 
 def index(request):
     if request.method == 'POST':
@@ -39,12 +40,7 @@ def index(request):
                     recipient_list,
                     html_message=html
                 )
-                return render(request, 'contact/confirmation.html', {
-                    'name': name,
-                    'email': email,
-                    'subject': subject,
-                    'message': message,
-                })
+                return redirect('confirmation')
             except Exception as e:
                 print(f'Error sending email: {e}')
                 # Optionally, add error handling here
@@ -53,4 +49,10 @@ def index(request):
 
     return render(request, 'contact/index.html', {
         'form': form,
+    })
+def confirmation(request):
+    # Retrieve all contact records from the database
+    contacts = Contact.objects.all()
+    return render(request, 'contact/confirmation.html', {
+        'contacts': contacts,
     })

@@ -5,10 +5,27 @@
     <title>Confirmation</title>
 </head>
 <body>
-    <h1>Thank You for Your Submission!</h1>
-    <p><strong>Name:</strong> {{ name }}</p>
-    <p><strong>Email:</strong> {{ email }}</p>
-    <p><strong>Subject:</strong> {{ subject }}</p>
-    <p><strong>Message:</strong> {{ message }}</p>
+    <h1>Thank you for your submission!</h1>
+    <h2>All Contact Form Entries:</h2>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Message</th>
+        </tr>
+        {% for contact in contacts %}
+        <tr>
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.email }}</td>
+            <td>{{ contact.subject }}</td>
+            <td>{{ contact.message }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No entries yet.</td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
