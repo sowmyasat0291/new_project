@@ -1,31 +1,5 @@
-<!-- contact/templates/contact/confirmation.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Confirmation</title>
-</head>
-<body>
-    <h1>Thank you for your submission!</h1>
-    <h2>All Contact Form Entries:</h2>
-    <table border="1">
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Subject</th>
-            <th>Message</th>
-        </tr>
-        {% for contact in contacts %}
-        <tr>
-            <td>{{ contact.name }}</td>
-            <td>{{ contact.email }}</td>
-            <td>{{ contact.subject }}</td>
-            <td>{{ contact.message }}</td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="4">No entries yet.</td>
-        </tr>
-        {% endfor %}
-    </table>
-</body>
-</html>
+<h1>Confirmation Page</h1>
+<p>Name: {{ contact.name }}</p>
+<p>Email: {{ contact.email }}</p>
+<p>Subject: {{ contact.subject }}</p>
+<p>Message: {{ contact.message }}</p>
